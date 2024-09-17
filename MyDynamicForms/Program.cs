@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using MyDynamicForms.Models;
+using MyDynamicForms.Models.Context;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,8 +17,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DbmyFormsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDbContext<DbAuthIdentityContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<DbmyFormsContext>()
+    .AddEntityFrameworkStores<DbAuthIdentityContext>()
     .AddDefaultTokenProviders();
 
 var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtConfig:Secret"]);

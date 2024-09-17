@@ -12,12 +12,9 @@ public partial class User
     public string LastName { get; set; } = null!;
 
     public string Username { get; set; } = null!;
+    public bool Active { get; set; } = true;
 
-    public string Password { get; set; } = null!;
-
-    public bool Active { get; set; }
-
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public string? CreatedBy { get; set; }
 
@@ -29,9 +26,9 @@ public partial class User
 
     public string? DeletedBy { get; set; }
 
-    public virtual ICollection<FormHasSection> FormHasSections { get; set; } = new List<FormHasSection>();
+    public virtual ICollection<FormHasSection>? FormHasSections { get; set; } = new List<FormHasSection>();
 
-    public virtual ICollection<Form> Forms { get; set; } = new List<Form>();
+    public virtual ICollection<Form>? Forms { get; set; } = new List<Form>();
 
-    public virtual ICollection<ModelHasRol> ModelHasRols { get; set; } = new List<ModelHasRol>();
+    public virtual ICollection<ModelHasRol>? ModelHasRols { get; set; } = new List<ModelHasRol>();
 }
