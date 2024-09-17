@@ -32,7 +32,7 @@ public class AuthController : ControllerBase
         _dbContext.Users.Add(newUser);
         int affected = await _dbContext.SaveChangesAsync();
 
-        if (affected > 0) return BadRequest(result.Errors);
+        if (affected < 0) return BadRequest(result.Errors);
 
         return Ok(new { result = "User created successfully!" });
     }
@@ -57,7 +57,7 @@ public class AuthController : ControllerBase
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id) }),
-            Expires = DateTime.UtcNow.AddHours(1),
+            Expires = DateTime.UtcNow.AddHours(10),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);

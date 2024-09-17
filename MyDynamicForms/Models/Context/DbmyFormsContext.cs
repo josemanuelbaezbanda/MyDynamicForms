@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace MyDynamicForms.Models;
+namespace MyDynamicForms.Models.Context;
 
 public partial class DbmyFormsContext : DbContext
 {
@@ -722,10 +722,6 @@ public partial class DbmyFormsContext : DbContext
                 .HasMaxLength(150)
                 .IsUnicode(false)
                 .HasColumnName("name");
-            entity.Property(e => e.Password)
-                .HasMaxLength(150)
-                .IsUnicode(false)
-                .HasColumnName("password");
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("updated_at");
